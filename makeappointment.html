@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Book an Appointment</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h2>Book an Appointment</h2>
+    <div id="calendar"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        gapi.load('client', initClient);
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: 'YOUR_API_KEY',
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+            }).then(function() {
+                listUpcomingEvents();
+            });
+        }
+
+        function listUpcomingEvents() {
+            var request = gapi.client.calendar.events.list({
+                'calendarId': 'YOUR_CALENDAR_ID',
+                'timeMin': (new Date()).toISOString(),
+                'showDeleted': false,
+                'singleEvents': true,
+                'orderBy': 'startTime'
+            });
+
+            request.execute(function(response) {
+                var events = response.items;
+                if (events.length > 0) {
+                    for (var i = 0; i < events.length; i++) {
+                        var event = events[i];
+                        var startDate = new Date(event.start.dateTime);
+                        var endDate = new Date(event.end.dateTime);
+                        var title = event.summary;
+                        console.log('Event: ' + title + ' - ' + startDate.toDateString());
+                        markUnavailable(startDate);
+                    }
+                } else {
+                    console.log('No upcoming events found.');
+                }
+            });
+        }
+
+        function markUnavailable(date) {
+            // Implement logic to mark the date as unavailable in your frontend (e.g., change the style, disable the date, etc.)
+            // Here, I'll just log the date for demonstration
+            console.log('Date marked as unavailable: ' + date.toDateString());
+        }
+    </script>
+</body>
+</html>

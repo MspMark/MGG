@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MGG Writing Services - Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* Additional styles for book-like display */
+        .writing-sample {
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .book {
+            width: 3in;
+            height: 7in;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            overflow: hidden;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        .book h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <ul>
+            <li><a class="head" href="index.html">Website</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="calculator.html">Calculator</a></li>
+        </ul>
+    </div>
+
+    <div id="portfolio" class="content">
+        <h2>Our Writing Portfolio</h2>
+
+        <!-- Fictional Writing Sample -->
+        <div class="writing-sample" id="fictional-writing">
+            <h3>Fictional Writing</h3>
+            <p>
+                World of untold truths
+
+                In my world, there was a young man named Mac who had big dreams...
+            </p>
+        </div>
+
+        <!-- Interview Writing Sample -->
+        <div class="writing-sample" id="interview-writing">
+            <h3>Interview Writing</h3>
+            <p>
+                A book's visual concept
+
+                It varies from that of a show, movie, or game...
+            </p>
+        </div>
+
+        <!-- Professional Writing Sample -->
+        <div class="writing-sample" id="professional-writing">
+            <h3>Professional Writing</h3>
+            <p>
+                The Chimney Sweeper
+
+                After reading William Blake's poem "The Chimney Sweeper," I can conclude it shows...
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a class="btn" href="https://www.instagram.com/MGGLocalServices/?hl=en" target="_blank">Follow Us on Instagram</a>
+    </div>
+
+    <div id="modal" class="book">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modal-content"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to open modal/book
+        function openModal(id) {
+            var modal = document.getElementById('modal');
+            var content = document.getElementById(id).innerHTML;
+            document.getElementById('modal-content').innerHTML = content;
+            modal.style.display = 'block';
+        }
+
+        // Function to close modal/book
+        function closeModal() {
+            var modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
